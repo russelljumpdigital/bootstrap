@@ -127,7 +127,11 @@ class Dropdown extends BaseComponent {
       return
     }
 
-    this._createPopper()
+    if (this._popper) {
+      this._popper.update()
+    } else {
+      this._createPopper()
+    }
 
     // If this is a touch-enabled device we add extra
     // empty mouseover listeners to the body's immediate children;
@@ -187,10 +191,6 @@ class Dropdown extends BaseComponent {
       for (const element of [].concat(...document.body.children)) {
         EventHandler.off(element, 'mouseover', noop)
       }
-    }
-
-    if (this._popper) {
-      this._popper.destroy()
     }
 
     this._menu.classList.remove(CLASS_NAME_SHOW)
