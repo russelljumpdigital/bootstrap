@@ -356,7 +356,6 @@ describe('Collapse', () => {
       })
 
       collapseEl1.addEventListener('shown.bs.collapse', () => {
-
         setTimeout(() => {
           expect(collapseEl2).not.toHaveClass('show')
           done()
