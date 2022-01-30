@@ -325,22 +325,22 @@ describe('Collapse', () => {
 
     it('should be able to handle quick toggling between siblings', done => {
       fixtureEl.innerHTML = [
-        ' <div class="accordion" id="accordionExample">',
-        '   <div class="accordion-item">',
-        '     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">',
-        '         Accordion Item #1',
-        '     </button>',
-        '     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">',
-        '     </div>',
-        '   </div>',
-        '   <div class="accordion-item">',
-        '     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">',
-        '         Accordion Item #2',
-        '     </button>',
-        '     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">',
-        '     </div>',
-        '   </div>',
-        ' </div>'
+        '<div class="accordion" id="accordionExample">',
+        '  <div class="accordion-item">',
+        '    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">',
+        '      Accordion Item #1',
+        '    </button>',
+        '    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">',
+        '    </div>',
+        '  </div>',
+        '  <div class="accordion-item">',
+        '    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">',
+        '      Accordion Item #2',
+        '    </button>',
+        '    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">',
+        '    </div>',
+        '  </div>',
+        '</div>'
       ].join('')
 
       const el = selector => fixtureEl.querySelector(selector)
