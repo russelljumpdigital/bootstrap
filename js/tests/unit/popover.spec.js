@@ -63,106 +63,81 @@ describe('Popover', () => {
 
   describe('show', () => {
     it('should show a popover', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#" title="Popover" data-bs-content="https://twitter.com/getbootstrap">BS twitter</a>'
+      fixtureEl.innerHTML = '<a href="#" title="Popover" data-bs-content="https://twitter.com/getbootstrap">BS twitter</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl)
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl, { animation: false })
 
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          expect(document.querySelector('.popover')).not.toBeNull()
-          resolve()
-        })
-
-        popover.show()
-      })
+      popover.show()
+      expect(document.querySelector('.popover')).not.toBeNull()
     })
 
     it('should set title and content from functions', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#">BS twitter</a>'
+      fixtureEl.innerHTML = '<a href="#">BS twitter</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl, {
-          title: () => 'Bootstrap',
-          content: () => 'loves writing tests （╯°□°）╯︵ ┻━┻'
-        })
-
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          const popoverDisplayed = document.querySelector('.popover')
-
-          expect(popoverDisplayed).not.toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Bootstrap')
-          expect(popoverDisplayed.querySelector('.popover-body').textContent).toEqual('loves writing tests （╯°□°）╯︵ ┻━┻')
-          resolve()
-        })
-
-        popover.show()
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl, {
+        animation: false,
+        title: () => 'Bootstrap',
+        content: () => 'loves writing tests （╯°□°）╯︵ ┻━┻'
       })
+
+      popover.show()
+      const popoverDisplayed = document.querySelector('.popover')
+
+      expect(popoverDisplayed).not.toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Bootstrap')
+      expect(popoverDisplayed.querySelector('.popover-body').textContent).toEqual('loves writing tests （╯°□°）╯︵ ┻━┻')
     })
 
     it('should show a popover with just content without having header', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#">Nice link</a>'
+      fixtureEl.innerHTML = '<a href="#">Nice link</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl, {
-          content: 'Some beautiful content :)'
-        })
-
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          const popoverDisplayed = document.querySelector('.popover')
-
-          expect(popoverDisplayed).not.toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-header')).toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-body').textContent).toEqual('Some beautiful content :)')
-          resolve()
-        })
-
-        popover.show()
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl, {
+        animation: false,
+        content: 'Some beautiful content :)'
       })
+
+      popover.show()
+
+      const popoverDisplayed = document.querySelector('.popover')
+
+      expect(popoverDisplayed).not.toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-header')).toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-body').textContent).toEqual('Some beautiful content :)')
     })
 
     it('should show a popover with just title without having body', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#">Nice link</a>'
+      fixtureEl.innerHTML = '<a href="#">Nice link</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl, {
-          title: 'Title which does not require content'
-        })
-
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          const popoverDisplayed = document.querySelector('.popover')
-
-          expect(popoverDisplayed).not.toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-body')).toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Title which does not require content')
-          resolve()
-        })
-
-        popover.show()
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl, {
+        animation: false,
+        title: 'Title which does not require content'
       })
+
+      popover.show()
+
+      const popoverDisplayed = document.querySelector('.popover')
+
+      expect(popoverDisplayed).not.toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-body')).toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Title which does not require content')
     })
 
     it('should show a popover with just title without having body using data-attribute to get config', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#" data-bs-content="" title="Title which does not require content">Nice link</a>'
+      fixtureEl.innerHTML = '<a href="#" data-bs-content="" title="Title which does not require content">Nice link</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl)
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl)
 
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          const popoverDisplayed = document.querySelector('.popover')
+      popover.show()
+      const popoverDisplayed = document.querySelector('.popover')
 
-          expect(popoverDisplayed).not.toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-body')).toBeNull()
-          expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Title which does not require content')
-          resolve()
-        })
-
-        popover.show()
-      })
+      expect(popoverDisplayed).not.toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-body')).toBeNull()
+      expect(popoverDisplayed.querySelector('.popover-header').textContent).toEqual('Title which does not require content')
     })
 
     it('should NOT show a popover without `title` and `content`', () => {
@@ -229,21 +204,16 @@ describe('Popover', () => {
     })
 
     it('should show a popover with provided custom class', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<a href="#" title="Popover" data-bs-content="https://twitter.com/getbootstrap" data-bs-custom-class="custom-class">BS twitter</a>'
+      fixtureEl.innerHTML = '<a href="#" title="Popover" data-bs-content="https://twitter.com/getbootstrap" data-bs-custom-class="custom-class">BS twitter</a>'
 
-        const popoverEl = fixtureEl.querySelector('a')
-        const popover = new Popover(popoverEl)
+      const popoverEl = fixtureEl.querySelector('a')
+      const popover = new Popover(popoverEl, { animation: false })
 
-        popoverEl.addEventListener('shown.bs.popover', () => {
-          const tip = document.querySelector('.popover')
-          expect(tip).not.toBeNull()
-          expect(tip).toHaveClass('custom-class')
-          resolve()
-        })
+      popover.show()
+      const tip = document.querySelector('.popover')
+      expect(tip).not.toBeNull()
 
-        popover.show()
-      })
+      expect(tip).toHaveClass('custom-class')
     })
   })
 
