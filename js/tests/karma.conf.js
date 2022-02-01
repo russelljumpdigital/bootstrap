@@ -57,9 +57,6 @@ const config = {
   autoWatch: false,
   singleRun: true,
   concurrency: Number.POSITIVE_INFINITY,
-  browserDisconnectTolerance: 3,
-  browserDisconnectTimeout: 10_000,
-  browserNoActivityTimeout: 60_000,
   client: {
     clearContext: false
   },
@@ -110,12 +107,19 @@ if (BROWSERSTACK) {
     accessKey: ENV.BROWSER_STACK_ACCESS_KEY,
     build: `bootstrap-${ENV.GITHUB_SHA ? ENV.GITHUB_SHA.slice(0, 7) + '-' : ''}${new Date().toISOString()}`,
     project: 'Bootstrap',
-    retryLimit: 2
+    retryLimit: 3,
+    apiClientEndpoint: 'https://api.browserstack.com',
+    debug: true
   }
-  plugins.push('karma-browserstack-launcher', 'karma-jasmine-html-reporter')
+  config.browserDisconnectTimeout = 60 * 1000 // default 2000
+  config.browserDisconnectTolerance = 0 // default 0
+  config.browserNoActivityTimeout = 60 * 1000 // default 10000
+  config.browserSocketTimeout = 1.2e5
+  config.captureTimeout = 60 * 1000
+  plugins.push('karma-browserstack-launcher')
   config.customLaunchers = browsers
   config.browsers = Object.keys(browsers)
-  reporters.push('BrowserStack', 'kjhtml')
+  reporters.push('BrowserStack')
 } else if (JQUERY_TEST) {
   frameworks.push('detectBrowsers')
   plugins.push(
