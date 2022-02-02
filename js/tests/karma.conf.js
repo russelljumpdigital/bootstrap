@@ -56,7 +56,7 @@ const config = {
   colors: true,
   autoWatch: false,
   singleRun: true,
-  concurrency: Number.POSITIVE_INFINITY,
+  concurrency: 4,
   client: {
     clearContext: false
   },
