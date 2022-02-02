@@ -107,7 +107,7 @@ if (BROWSERSTACK) {
     accessKey: ENV.BROWSER_STACK_ACCESS_KEY,
     build: `bootstrap-${ENV.GITHUB_SHA ? ENV.GITHUB_SHA.slice(0, 7) + '-' : ''}${new Date().toISOString()}`,
     project: 'Bootstrap',
-    retryLimit: 3,
+    retryLimit: 5,
     apiClientEndpoint: 'https://api.browserstack.com',
     debug: true
   }
