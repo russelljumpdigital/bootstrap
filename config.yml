@@ -1,13 +1,4 @@
-languageCode:           "en"
-title:                  "Bootstrap"
-baseURL:                "https://getbootstrap.com"
-
-security:
-  enableInlineShortcodes: true
-  funcs:
-    getenv:
-      - ^HUGO_
-      - NETLIFY
+  - NETLIFY
 
 markup:
   goldmark:
